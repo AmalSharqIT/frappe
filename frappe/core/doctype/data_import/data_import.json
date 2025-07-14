@@ -171,7 +171,7 @@
  ],
  "hide_toolbar": 1,
  "links": [],
- "modified": "2025-07-15 01:27:43.887910",
+ "modified": "2025-07-15 01:57:03.962005",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Data Import",
@@ -211,6 +211,34 @@
    "delete": 1,
    "read": 1,
    "role": "Item Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Knowledge Base Editor",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Manufacturing Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Manufacturing User",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Newsletter Manager",
    "write": 1
   },
   {
@@ -257,6 +285,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Website Manager",
    "share": 1,
    "write": 1
   }
