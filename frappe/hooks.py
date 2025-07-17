@@ -494,12 +494,6 @@ standard_navbar_items = [
 		"is_standard": 1,
 	},
 	{
-		"item_label": "Apps",
-		"item_type": "Route",
-		"route": "/apps",
-		"is_standard": 1,
-	},
-	{
 		"item_label": "Toggle Full Width",
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.toggle_full_width()",
@@ -517,6 +511,24 @@ standard_navbar_items = [
 		"item_label": "",
 	},
 	{
+		"item_label": "About",
+		"item_type": "Action",
+		"action": "frappe.ui.toolbar.show_about()",
+		"is_standard": 1,
+		"condition": "frappe.user.has_role('System Manager')",
+	},
+	{
+		"item_label": "Keyboard Shortcuts",
+		"item_type": "Action",
+		"action": "frappe.ui.toolbar.show_shortcuts(event)",
+		"is_standard": 1,
+	},
+	{
+		"item_type": "Separator",
+		"is_standard": 1,
+		"item_label": "",
+	},
+	{
 		"item_label": "Log out",
 		"item_type": "Action",
 		"action": "frappe.app.logout()",
@@ -525,18 +537,6 @@ standard_navbar_items = [
 ]
 
 standard_help_items = [
-	{
-		"item_label": "About",
-		"item_type": "Action",
-		"action": "frappe.ui.toolbar.show_about()",
-		"is_standard": 1,
-	},
-	{
-		"item_label": "Keyboard Shortcuts",
-		"item_type": "Action",
-		"action": "frappe.ui.toolbar.show_shortcuts(event)",
-		"is_standard": 1,
-	},
 	{
 		"item_label": "Frappe Support",
 		"item_type": "Route",

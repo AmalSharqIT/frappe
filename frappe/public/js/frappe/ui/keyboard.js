@@ -231,15 +231,6 @@ frappe.ui.keys.add_shortcut({
 	description: __("Show Keyboard Shortcuts"),
 });
 
-frappe.ui.keys.add_shortcut({
-	shortcut: "alt+h",
-	action: function (e) {
-		e.preventDefault();
-		$(".dropdown-help button").eq(0).click();
-	},
-	description: __("Open Help"),
-});
-
 frappe.ui.keys.on("escape", function (e) {
 	handle_escape_key();
 });
