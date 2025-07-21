@@ -90,22 +90,6 @@
  "owner": "Administrator",
  "permissions": [
   {
-   "read": 1,
-   "role": "Accounts Manager"
-  },
-  {
-   "read": 1,
-   "role": "Accounts User"
-  },
-  {
-   "read": 1,
-   "role": "Purchase User"
-  },
-  {
-   "read": 1,
-   "role": "Sales User"
-  },
-  {
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -117,6 +101,22 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Accounts Manager"
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
+  },
+  {
+   "read": 1,
+   "role": "Sales User"
+  },
+  {
+   "read": 1,
+   "role": "Purchase User"
   },
   {
    "read": 1,
