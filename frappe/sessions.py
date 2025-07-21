@@ -253,6 +253,7 @@ class Session:
 		self.sid = self.data.sid = sid
 		self.data.data.user = self.user
 		self.data.data.session_ip = frappe.local.request_ip
+		self.data.data.employee = frappe.db.exists("Employee", {"user_id": self.user})
 
 		if session_end:
 			self.data.data.session_end = session_end
