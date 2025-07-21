@@ -82,7 +82,7 @@
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-18 00:13:53.796434",
+ "modified": "2024-01-30 13:18:12.053557",
  "modified_by": "Administrator",
  "module": "Geo",
  "name": "Currency",
@@ -96,10 +96,6 @@
   {
    "read": 1,
    "role": "Accounts User"
-  },
-  {
-   "read": 1,
-   "role": "HR User"
   },
   {
    "read": 1,
@@ -121,9 +117,12 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HR User"
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
