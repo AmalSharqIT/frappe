@@ -33,6 +33,8 @@
   "modules_html",
   "block_modules",
   "home_settings",
+  "allowed_accounts_section",
+  "payment_accounts",
   "short_bio",
   "gender",
   "birth_date",
@@ -811,6 +813,17 @@
    "fieldname": "dashboard",
    "fieldtype": "Check",
    "label": "Dashboard"
+  },
+  {
+   "fieldname": "allowed_accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Allowed Accounts"
+  },
+  {
+   "fieldname": "payment_accounts",
+   "fieldtype": "Table",
+   "label": "Payment Accounts",
+   "options": "User Account"
   }
  ],
  "icon": "fa fa-user",
