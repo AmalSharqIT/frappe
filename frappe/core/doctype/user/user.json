@@ -823,7 +823,8 @@
    "fieldname": "payment_accounts",
    "fieldtype": "Table",
    "label": "Payment Accounts",
-   "options": "User Account"
+   "options": "User Account",
+   "permlevel": 1
   }
  ],
  "icon": "fa fa-user",
