@@ -99,7 +99,7 @@ frappe.ui.form.ControlDuration = class ControlDuration extends frappe.ui.form.Co
 			if (
 				this.df.read_only ||
 				(this.df.read_only_depends_on &&
-					this.frm.layout.evaluate_depends_on_value(df.read_only_depends_on))
+					this.frm.layout.evaluate_depends_on_value(this.df.read_only_depends_on))
 			)
 				return;
 			this.$picker.show();
