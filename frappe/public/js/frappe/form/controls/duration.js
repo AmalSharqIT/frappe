@@ -96,6 +96,12 @@ frappe.ui.form.ControlDuration = class ControlDuration extends frappe.ui.form.Co
 		});
 
 		this.$input.on("focus", () => {
+			if (
+				this.df.read_only ||
+				(this.df.read_only_depends_on &&
+					this.frm.layout.evaluate_depends_on_value(df.read_only_depends_on))
+			)
+				return;
 			this.$picker.show();
 			let is_picker_set = this.is_duration_picker_set(this.inputs);
 			if (!is_picker_set) {
