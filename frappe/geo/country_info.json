@@ -1300,11 +1300,9 @@
  "Iraq": {
   "code": "iq",
   "currency": "IQD",
-  "currency_fraction": "Fils",
-  "currency_fraction_units": 1000,
   "currency_name": "Iraqi Dinar",
   "currency_symbol": "\u0639.\u062f",
-  "number_format": "#,###.###",
+  "number_format": "#,###",
   "timezones": [
    "Asia/Baghdad"
   ],

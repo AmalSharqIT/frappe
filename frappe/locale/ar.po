@@ -29766,7 +29766,7 @@ msgstr ""
 #: frappe/public/js/frappe/utils/utils.js:1124
 msgctxt "Days (Field: Duration)"
 msgid "d"
-msgstr "د"
+msgstr "ي"
 
 #. Option for the 'Indicator Color' (Select) field in DocType 'Workspace'
 #: frappe/desk/doctype/workspace/workspace.json
@@ -30045,7 +30045,7 @@ msgstr ""
 #: frappe/public/js/frappe/utils/utils.js:1128
 msgctxt "Hours (Field: Duration)"
 msgid "h"
-msgstr "ح"
+msgstr "س"
 
 #. Option for the 'Icon' (Select) field in DocType 'Workflow State'
 #: frappe/workflow/doctype/workflow_state/workflow_state.json
@@ -30200,7 +30200,7 @@ msgstr ""
 #: frappe/public/js/frappe/utils/utils.js:1132
 msgctxt "Minutes (Field: Duration)"
 msgid "m"
-msgstr "م"
+msgstr "د"
 
 #. Option for the 'Icon' (Select) field in DocType 'Workflow State'
 #: frappe/workflow/doctype/workflow_state/workflow_state.json
@@ -30551,7 +30551,7 @@ msgstr "طريق"
 #: frappe/public/js/frappe/utils/utils.js:1136
 msgctxt "Seconds (Field: Duration)"
 msgid "s"
-msgstr "س"
+msgstr "ث"
 
 #. Option for the 'Code challenge method' (Select) field in DocType 'OAuth
 #. Authorization Code'
