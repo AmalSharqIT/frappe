@@ -1301,8 +1301,9 @@
   "code": "iq",
   "currency": "IQD",
   "currency_name": "Iraqi Dinar",
-  "currency_symbol": "\u0639.\u062f",
+  "currency_symbol": "\u062f.\u0639",
   "number_format": "#,###",
+  "symbol_on_right": 1,
   "timezones": [
    "Asia/Baghdad"
   ],
