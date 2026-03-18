@@ -97,12 +97,6 @@
    "delete": 1,
    "read": 1,
    "role": "System Manager"
-  },
-  {
-   "delete": 1,
-   "if_owner": 1,
-   "read": 1,
-   "role": "All"
   }
  ],
  "sort_field": "modified",
