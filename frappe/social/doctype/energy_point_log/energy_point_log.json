@@ -120,11 +120,6 @@
    "read": 1,
    "report": 1,
    "role": "System Manager"
-  },
-  {
-   "read": 1,
-   "report": 1,
-   "role": "Desk User"
   }
  ],
  "sort_field": "modified",

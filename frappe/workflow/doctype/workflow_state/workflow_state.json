@@ -56,10 +56,6 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "role": "Desk User",
-   "select": 1
   }
  ],
  "quick_entry": 1,
