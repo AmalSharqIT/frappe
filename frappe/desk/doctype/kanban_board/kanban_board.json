@@ -92,16 +92,8 @@
  "owner": "Administrator",
  "permissions": [
   {
-   "read": 1,
-   "role": "Desk User"
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "if_owner": 1,
-   "read": 1,
    "role": "Desk User",
-   "write": 1
+   "select": 1
   },
   {
    "create": 1,
