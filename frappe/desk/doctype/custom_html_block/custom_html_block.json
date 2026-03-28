@@ -101,6 +101,10 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "read": 1,
+   "role": "Desk User"
+  },
+  {
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -123,10 +127,6 @@
    "role": "Workspace Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "read": 1,
-   "role": "Desk User"
   }
  ],
  "sort_field": "modified",
