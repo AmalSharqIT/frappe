@@ -475,12 +475,6 @@ export_python_type_annotations = True
 
 standard_navbar_items = [
 	{
-		"item_label": "My Profile",
-		"item_type": "Route",
-		"route": "/app/user-profile",
-		"is_standard": 1,
-	},
-	{
 		"item_label": "My Settings",
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.route_to_user()",
@@ -509,6 +503,7 @@ standard_navbar_items = [
 		"item_type": "Route",
 		"route": "/apps",
 		"is_standard": 1,
+		"condition": "frappe.user.has_role('System Manager')",
 	},
 	{
 		"item_label": "Toggle Full Width",
@@ -520,6 +515,24 @@ standard_navbar_items = [
 		"item_label": "Toggle Theme",
 		"item_type": "Action",
 		"action": "new frappe.ui.ThemeSwitcher().show()",
+		"is_standard": 1,
+	},
+	{
+		"item_type": "Separator",
+		"is_standard": 1,
+		"item_label": "",
+	},
+	{
+		"item_label": "About",
+		"item_type": "Action",
+		"action": "frappe.ui.toolbar.show_about()",
+		"is_standard": 1,
+		"condition": "frappe.user.has_role('System Manager')",
+	},
+	{
+		"item_label": "Keyboard Shortcuts",
+		"item_type": "Action",
+		"action": "frappe.ui.toolbar.show_shortcuts(event)",
 		"is_standard": 1,
 	},
 	{
