@@ -51,7 +51,7 @@ from .utils.jinja import (
 )
 from .utils.lazy_loader import lazy_import
 
-__version__ = "15.104.0"
+__version__ = "15.105.0"
 __title__ = "Frappe Framework"
 
 # This if block is never executed when running the code. It is only used for
@@ -105,7 +105,6 @@ def _(msg: str, lang: str | None = None, context: str | None = None) -> str:
 	        _('Change', context='Coins')
 	"""
 	from frappe.translate import get_all_translations
-	from frappe.utils import is_html, strip_html_tags
 
 	if not hasattr(local, "lang"):
 		local.lang = lang or "en"
@@ -115,9 +114,6 @@ def _(msg: str, lang: str | None = None, context: str | None = None) -> str:
 
 	all_translations = get_all_translations(lang)
 	non_translated_string = msg
-
-	if is_html(msg):
-		msg = strip_html_tags(msg)
 
 	# msg should always be unicode
 	msg = as_unicode(msg).strip()
