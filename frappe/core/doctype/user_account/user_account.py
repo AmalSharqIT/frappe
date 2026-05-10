@@ -10,8 +10,8 @@ class UserAccount(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		access_type: DF.Literal["Payment", "Read"]
 		account: DF.Link
-		account_type: DF.Literal["", "Cash", "Bank"]
 		mode_of_payment: DF.Link | None
 		parent: DF.Data
 		parentfield: DF.Data
