@@ -861,7 +861,6 @@
   {
    "fieldname": "payment_accounts",
    "fieldtype": "Table",
-   "label": "Payment Accounts",
    "options": "User Account",
    "permlevel": 1
   }
@@ -927,7 +926,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2026-03-29",
+ "modified": "2026-05-10",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "User",

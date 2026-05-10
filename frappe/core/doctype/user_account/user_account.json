@@ -4,14 +4,20 @@
   "doctype": "DocType",
   "editable_grid": 1,
   "engine": "InnoDB",
-  "field_order": ["account", "mode_of_payment"],
+  "field_order": ["access_type", "account", "mode_of_payment"],
   "fields": [
+    {
+      "fieldname": "access_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Access Type",
+      "options": "Payment\nRead"
+    },
     {
       "fieldname": "account",
       "fieldtype": "Link",
       "in_list_view": 1,
       "label": "Account",
-      "link_filters": "[[\"Account\",\"is_group\",\"=\",0],[\"Account\",\"account_type\",\"in\",[\"Bank\",\"Cash\"]]]",
       "options": "Account",
       "reqd": 1
     },
@@ -26,7 +32,7 @@
   "grid_page_length": 50,
   "istable": 1,
   "links": [],
-  "modified": "2026-03-29",
+  "modified": "2026-05-10",
   "modified_by": "Administrator",
   "module": "Core",
   "name": "User Account",
