@@ -11,7 +11,8 @@
       "fieldtype": "Select",
       "in_list_view": 1,
       "label": "Access Type",
-      "options": "Payment\nRead"
+      "options": "Payment\nRead",
+      "reqd": 1
     },
     {
       "fieldname": "account",
