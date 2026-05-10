@@ -11,6 +11,7 @@ class UserAccount(Document):
 		from frappe.types import DF
 
 		account: DF.Link
+		account_type: DF.Literal["", "Cash", "Bank"]
 		mode_of_payment: DF.Link | None
 		parent: DF.Data
 		parentfield: DF.Data
