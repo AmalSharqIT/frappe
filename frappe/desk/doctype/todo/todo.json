@@ -161,7 +161,7 @@
  "icon": "fa fa-check",
  "idx": 2,
  "links": [],
- "modified": "2023-10-05 07:44:38.476400",
+ "modified": "2026-03-29",
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "ToDo",
@@ -170,12 +170,8 @@
   {
    "create": 1,
    "delete": 1,
-   "email": 1,
-   "print": 1,
    "read": 1,
-   "report": 1,
    "role": "All",
-   "share": 1,
    "write": 1
   },
   {
