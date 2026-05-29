@@ -139,7 +139,7 @@
    "link_fieldname": "connected_app"
   }
  ],
- "modified": "2024-07-05 08:24:50.182706",
+ "modified": "2026-05-28",
  "modified_by": "Administrator",
  "module": "Integrations",
  "name": "Connected App",
@@ -156,10 +156,6 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "read": 1,
-   "role": "All"
   }
  ],
  "show_title_field_in_link": 1,
