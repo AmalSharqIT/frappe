@@ -64,6 +64,7 @@ class User(Document):
 		from frappe.core.doctype.block_module.block_module import BlockModule
 		from frappe.core.doctype.defaultvalue.defaultvalue import DefaultValue
 		from frappe.core.doctype.has_role.has_role import HasRole
+		from frappe.core.doctype.user_account.user_account import UserAccount
 		from frappe.core.doctype.user_email.user_email import UserEmail
 		from frappe.core.doctype.user_social_login.user_social_login import UserSocialLogin
 		from frappe.types import DF
@@ -118,6 +119,7 @@ class User(Document):
 		new_password: DF.Password | None
 		notifications: DF.Check
 		onboarding_status: DF.SmallText | None
+		allowed_accounts: DF.Table[UserAccount]
 		phone: DF.Data | None
 		redirect_url: DF.SmallText | None
 		reset_password_key: DF.Data | None
