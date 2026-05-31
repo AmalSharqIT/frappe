@@ -69,6 +69,7 @@ class User(Document):
 		from frappe.core.doctype.user_social_login.user_social_login import UserSocialLogin
 		from frappe.types import DF
 
+		allowed_accounts: DF.Table[UserAccount]
 		allowed_in_mentions: DF.Check
 		api_key: DF.Data | None
 		api_secret: DF.Password | None
@@ -119,7 +120,6 @@ class User(Document):
 		new_password: DF.Password | None
 		notifications: DF.Check
 		onboarding_status: DF.SmallText | None
-		allowed_accounts: DF.Table[UserAccount]
 		phone: DF.Data | None
 		redirect_url: DF.SmallText | None
 		reset_password_key: DF.Data | None
