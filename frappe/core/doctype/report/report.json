@@ -207,7 +207,7 @@
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-28 18:28:32.510719",
+ "modified": "2026-05-28",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Report",
@@ -248,10 +248,7 @@
    "write": 1
   },
   {
-   "email": 1,
-   "print": 1,
    "read": 1,
-   "report": 1,
    "role": "Desk User"
   }
  ],
