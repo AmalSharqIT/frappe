@@ -216,7 +216,7 @@
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-04 03:43:50.279111",
+ "modified": "2026-06-04",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Report",
@@ -257,10 +257,7 @@
    "write": 1
   },
   {
-   "email": 1,
-   "print": 1,
    "read": 1,
-   "report": 1,
    "role": "Desk User"
   }
  ],

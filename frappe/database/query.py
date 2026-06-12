@@ -193,6 +193,8 @@ FUNCTION_MAPPING = {
 	"MONTHNAME": MonthName,
 	"QUARTER": Quarter,
 	"MONTH": Month,
+	"DATE": functions.Date,
+	"VALUEWRAPPER": ValueWrapper,
 }
 
 # Functions that accept '*' as an argument (e.g., COUNT(*))
