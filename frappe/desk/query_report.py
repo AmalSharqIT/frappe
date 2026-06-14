@@ -847,7 +847,7 @@ def save_report(reference_report, report_name, columns, filters):
 def get_filtered_data(ref_doctype, columns, data, user):
 	result = []
 	linked_doctypes = get_linked_doctypes(columns, data)
-	match_filters_per_doctype = get_user_match_filters(linked_doctypes, user=user)
+	match_filters_per_doctype = merge_nested_dicts(get_user_match_filters(linked_doctypes, user=user))
 	shared = frappe.share.get_shared(ref_doctype, user)
 	columns_dict = get_columns_dict(columns)
 
@@ -888,6 +888,16 @@ def get_filtered_data(ref_doctype, columns, data, user):
 	else:
 		result = list(data)
 
+	return result
+
+
+def merge_nested_dicts(data):
+	result = {}
+	for key, dict_list in data.items():
+		merged_dict = {}
+		for sub_dict in dict_list:
+			merged_dict.update(sub_dict)
+		result[key] = [merged_dict]
 	return result
 
 
