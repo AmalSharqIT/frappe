@@ -110,7 +110,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-08-28 22:33:08.420000",
+ "modified": "2026-06-14",
  "modified_by": "Administrator",
  "module": "Social",
  "name": "Energy Point Log",
@@ -120,11 +120,6 @@
    "read": 1,
    "report": 1,
    "role": "System Manager"
-  },
-  {
-   "read": 1,
-   "report": 1,
-   "role": "Desk User"
   }
  ],
  "sort_field": "modified",
