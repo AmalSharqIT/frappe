@@ -23,7 +23,7 @@ from frappe.model import CORE_DOCTYPES as PERMITTED_CORE_DOCTYPES
 from frappe.model import OPTIONAL_FIELDS, get_permitted_fields
 from frappe.model.base_document import DOCTYPES_FOR_DOCTYPE
 from frappe.model.document import Document
-from frappe.query_builder import Criterion, Field, Order, functions
+from frappe.query_builder import Criterion, CustomFunction, Field, Order, functions
 from frappe.query_builder.custom import Month, MonthName, Quarter
 
 CORE_DOCTYPES = DOCTYPES_FOR_DOCTYPE | frozenset(
@@ -193,6 +193,9 @@ FUNCTION_MAPPING = {
 	"MONTHNAME": MonthName,
 	"QUARTER": Quarter,
 	"MONTH": Month,
+	"DATE": functions.Date,
+	"VALUEWRAPPER": ValueWrapper,
+	"TIME": CustomFunction("TIME", ["time"]),
 }
 
 # Functions that accept '*' as an argument (e.g., COUNT(*))
