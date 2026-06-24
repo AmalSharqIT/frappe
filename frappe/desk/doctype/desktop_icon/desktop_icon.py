@@ -169,7 +169,11 @@ def get_desktop_icons(user=None, bootinfo=None):
 		permitted_parent_labels = set()
 		if bootinfo:
 			for s in user_icons:
-				if s.icon_type == "Folder":
+				roles = frappe.get_doc("Desktop Icon", s.name).get("roles") or []
+				allowed_roles = [d.role for d in roles]
+				if allowed_roles and not set(allowed_roles).intersection(frappe.get_roles()):
+					permitted = False
+				elif s.icon_type == "Folder":
 					permitted = True
 				elif s.icon_type == "App":
 					permitted = check_app_permission(s.label, s.app)
