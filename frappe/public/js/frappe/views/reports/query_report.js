@@ -2052,7 +2052,7 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 									? df.fieldname + "-" + frappe.scrub(values.doctype)
 									: df.fieldname,
 								fieldtype: df.fieldtype,
-								label: df.label,
+								label: __(df.label),
 								insert_after_index: insert_after_index,
 								link_field: {
 									fieldname: values.fieldname,
