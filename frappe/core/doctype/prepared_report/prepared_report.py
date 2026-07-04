@@ -79,7 +79,7 @@ class PreparedReport(Document):
 		timeout = frappe.get_value("Report", self.report_name, "timeout")
 		enqueue(
 			generate_report,
-			lang=frappe.session.data.lang,
+			lang=frappe.local.lang,
 			queue="long",
 			prepared_report=self.name,
 			timeout=timeout or REPORT_TIMEOUT,
