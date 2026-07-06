@@ -325,15 +325,7 @@ class User(Document):
 		self.share_with_self()
 		clear_notifications(user=self.name)
 		frappe.clear_cache(user=self.name)
-		now = frappe.in_test or frappe.flags.in_install
 		self.send_password_notification(self.__new_password)
-		frappe.enqueue(
-			"frappe.core.doctype.user.user.create_contact",
-			user=self,
-			ignore_mandatory=True,
-			now=now,
-			enqueue_after_commit=True,
-		)
 
 		# Set user selected timezone
 		if self.time_zone:
