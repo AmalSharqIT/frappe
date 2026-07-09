@@ -1,7 +1,6 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
  "creation": "2022-01-10 17:29:51.672911",
  "description": "Represents a User in the system.",
  "doctype": "DocType",
@@ -961,7 +960,7 @@
   }
  ],
  "make_attachments_public": 1,
- "modified": "2026-06-14",
+ "modified": "2026-07-09",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "User",
