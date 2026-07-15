@@ -250,13 +250,6 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 
 		if user:
 			frappe.set_user(user)
-			# resolve inline to avoid importing frappe.translate into every job's memory footprint
-			frappe.local.lang = (
-				frappe.get_cached_value("User", user, "language")
-				or frappe.get_system_settings("language")
-				or frappe.local.lang
-				or "en"
-			)
 
 	if isinstance(method, str):
 		method_name = method
