@@ -77,14 +77,14 @@ def get_cached_user_pass():
 	return (user, pwd)
 
 
-def authenticate_for_2factor(user):
+def authenticate_for_2factor(user, username):
 	"""Authenticate two factor for enabled user before login."""
 	if frappe.form_dict.get("otp"):
 		return
 	otp_secret = get_otpsecret_for_(user)
 	token = int(pyotp.TOTP(otp_secret).now())
 	tmp_id = frappe.generate_hash(length=8)
-	cache_2fa_data(user, token, otp_secret, tmp_id)
+	cache_2fa_data(username or user, token, otp_secret, tmp_id)
 	verification_obj = get_verification_obj(user, token, otp_secret)
 	# Save data in local
 	frappe.local.response["verification"] = verification_obj
