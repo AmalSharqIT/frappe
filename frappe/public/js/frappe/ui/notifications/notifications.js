@@ -7,7 +7,45 @@ frappe.ui.Notifications = class Notifications {
 		this.full_height = opts?.full_height || false;
 
 		this.wrapper = opts?.wrapper || $(".standard-items-sections");
+		this.setup_browser_notifications();
 		this.make();
+	}
+
+	setup_browser_notifications() {
+		if (Notification.permission === "default") {
+			Notification.requestPermission();
+		}
+		frappe.realtime.on("notification", (data) => {
+			this.show_browser_notification(data);
+		});
+	}
+	async show_browser_notification(data) {
+		if (
+			!data?.name ||
+			!navigator.locks ||
+			Notification.permission !== "granted"
+		) {
+			return;
+		}
+		const key = `erpriva_notification_log:${data.name}`;
+		await navigator.locks.request(key, () => {
+			if (localStorage.getItem(key)) return;
+			localStorage.setItem(key, "1");
+			const div = document.createElement("div");
+			div.innerHTML = data.title || "";
+			const notification = new Notification(data.type || __("Notification"), {
+				body: div.textContent.trim(),
+			});
+			notification.onclick = () => {
+				window.focus();
+				window.location.href =
+					data.link ||
+					frappe.utils.get_form_link(
+						data.document_type || "Notification Log",
+						data.document_name || data.name
+					);
+			};
+		});
 	}
 
 	make() {
