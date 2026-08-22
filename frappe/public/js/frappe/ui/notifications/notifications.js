@@ -20,11 +20,7 @@ frappe.ui.Notifications = class Notifications {
 		});
 	}
 	async show_browser_notification(data) {
-		if (
-			!data?.name ||
-			!navigator.locks ||
-			Notification.permission !== "granted"
-		) {
+		if (!data?.name || !navigator.locks || Notification.permission !== "granted") {
 			return;
 		}
 		const key = `erpriva_notification_log:${data.name}`;
