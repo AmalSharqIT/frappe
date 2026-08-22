@@ -16,7 +16,6 @@ login.bind_events = function () {
 	$(".form-login").on("submit", function (event) {
 		event.preventDefault();
 		var args = {};
-		args.cmd = "login";
 		args.usr = ($("#login_email").val() || "").trim();
 		args.pwd = $("#login_password").val();
 		let hasError = false;
@@ -29,7 +28,8 @@ login.bind_events = function () {
 			hasError = true;
 		}
 		if (hasError) return false;
-		login.call(args, null, "/api/method/login");
+		login.verify_url = "/api/method/login"
+		login.call(args, null, login.verify_url);
 		return false;
 	});
 
@@ -115,14 +115,14 @@ login.bind_events = function () {
 	{% if ldap_settings and ldap_settings.enabled %}
 	$(".btn-ldap-login").on("click", function () {
 		var args = {};
-		args.cmd = "{{ ldap_settings.method }}";
 		args.usr = ($("#login_email").val() || "").trim();
 		args.pwd = $("#login_password").val();
 		if (!args.usr || !args.pwd) {
 			login.set_status({{ _("Both login and password required") | tojson }}, 'red');
 			return false;
 		}
-		login.call(args);
+		login.verify_url = "/api/method/{{ ldap_settings.method }}"
+		login.call(args, null, login.verify_url);
 		return false;
 	});
 	{% endif %}
@@ -349,7 +349,6 @@ var verify_token = function (event) {
 	$(".form-verify").on("submit", function (eventx) {
 		eventx.preventDefault();
 		var args = {};
-		args.cmd = "login";
 		args.otp = $("#login_token").val();
 		args.tmp_id = frappe.get_cookie('tmp_id');
 		if (!args.otp) {
@@ -357,7 +356,7 @@ var verify_token = function (event) {
 			frappe.msgprint("{{ _('Login token required') | striptags | e }}");
 			return false;
 		}
-		login.call(args);
+		login.call(args, null, login.verify_url || "/api/method/login");
 		return false;
 	});
 }
