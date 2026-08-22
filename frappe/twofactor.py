@@ -77,7 +77,7 @@ def get_cached_user_pass():
 	return (user, pwd)
 
 
-def authenticate_for_2factor(user, username):
+def authenticate_for_2factor(user, username=None):
 	"""Authenticate two factor for enabled user before login."""
 	if frappe.form_dict.get("otp"):
 		return
