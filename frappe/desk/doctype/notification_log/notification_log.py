@@ -59,7 +59,19 @@ class NotificationLog(Document):
 			self.app = _resolve_app_for_doctype(self.document_type)
 
 	def after_insert(self):
-		frappe.publish_realtime("notification", after_commit=True, user=self.for_user)
+		frappe.publish_realtime(
+			"notification",
+			{
+				"name": self.name,
+				"type": self.type,
+				"title": self.title,
+				"document_type": self.document_type,
+				"document_name": self.document_name,
+				"link": self.link,
+			},
+			after_commit=True,
+			user=self.for_user,
+		)
 		set_notifications_as_unseen(self.for_user)
 		if is_email_notifications_enabled_for_type(self.for_user, self.type):
 			try:
