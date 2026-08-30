@@ -67,6 +67,8 @@ class NotificationLog(Document):
 				"title": self.title,
 				"document_type": self.document_type,
 				"document_name": self.document_name,
+				"source_doctype": self.source_doctype,
+				"source_name": self.source_name,
 				"link": self.link,
 			},
 			after_commit=True,

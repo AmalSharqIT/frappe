@@ -34,12 +34,7 @@ frappe.ui.Notifications = class Notifications {
 			});
 			notification.onclick = () => {
 				window.focus();
-				window.location.href =
-					data.link ||
-					frappe.utils.get_form_link(
-						data.document_type || "Notification Log",
-						data.document_name || data.name
-					);
+				window.location.href = this.tabs.notifications.get_item_link(data);
 			};
 		});
 	}
