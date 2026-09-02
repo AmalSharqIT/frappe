@@ -69,7 +69,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Number Format",
-   "options": "\n#,###.##\n#.###,##\n# ###.##\n# ###,##\n#'###.##\n#, ###.##\n#,##,###.##\n#,###.###\n#.###\n#,###"
+   "options": "\n#,###.##\n#.###,##\n# ###.##\n# ###,##\n#'###.##\n#, ###.##\n#,##,###.##\n#,###.###\n#.###\n#,###\n#,###.#"
   },
   {
    "default": "0",
@@ -82,7 +82,7 @@
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-21",
+ "modified": "2026-09-02",
  "modified_by": "Administrator",
  "module": "Geo",
  "name": "Currency",
