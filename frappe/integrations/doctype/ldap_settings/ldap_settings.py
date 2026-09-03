@@ -205,6 +205,9 @@ class LDAPSettings(Document):
 		user.remove_roles(*roles_to_remove)
 
 	def create_or_update_user(self, user_data: dict, groups: list | None = None):
+		if user_data["email"] is None:
+			frappe.throw(_("Your account has no email address."))
+
 		user: User = None
 		role: str = None
 
