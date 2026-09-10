@@ -159,19 +159,6 @@ frappe.ui.form.on("User", {
 				frm.toggle_display(["sb1", "sb3", "modules_access"], true);
 			}
 
-			frm.add_custom_button(
-				__("Reset Password"),
-				function () {
-					frappe.call({
-						method: "frappe.core.doctype.user.user.reset_password",
-						args: {
-							user: frm.doc.name,
-						},
-					});
-				},
-				__("Password")
-			);
-
 			if (frappe.user.has_role("System Manager")) {
 				frappe.db.get_single_value("LDAP Settings", "enabled").then((value) => {
 					if (value === 1 && frm.doc.name != "Administrator") {
@@ -224,7 +211,7 @@ frappe.ui.form.on("User", {
 
 			if (
 				frappe.defaults.is_enabled("enable_two_factor_auth") &&
-				(frappe.session.user == doc.name || frappe.user.has_role("System Manager"))
+				frappe.user.has_role("System Manager")
 			) {
 				frm.add_custom_button(
 					__("Reset OTP Secret"),
