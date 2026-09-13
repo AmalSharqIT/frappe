@@ -24,7 +24,6 @@
   "is_primary_address",
   "is_shipping_address",
   "disabled",
-  "baidu_location",
   "linked_with",
   "links"
  ],
@@ -152,19 +151,12 @@
    "fieldtype": "Table",
    "label": "Links",
    "options": "Dynamic Link"
-  },
-  {
-   "depends_on": "eval:doc.country=='China'",
-   "fieldname": "baidu_location",
-   "fieldtype": "Data",
-   "label": "Baidu Location",
-   "options": "URL"
   }
  ],
  "icon": "fa fa-map-marker",
  "idx": 5,
  "links": [],
- "modified": "2026-09-12",
+ "modified": "2026-06-20",
  "modified_by": "Administrator",
  "module": "Contacts",
  "name": "Address",

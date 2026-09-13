@@ -41,7 +41,6 @@ class Address(Document):
 			"Permanent",
 			"Other",
 		]
-		baidu_location: DF.Data | None
 		city: DF.Data
 		country: DF.Link
 		county: DF.Data | None
