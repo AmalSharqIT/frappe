@@ -116,11 +116,15 @@
   },
   {
    "read": 1,
-   "role": "All"
+   "role": "Purchase User"
   },
   {
    "role": "Desk User",
    "select": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
   }
  ],
  "row_format": "Dynamic",
