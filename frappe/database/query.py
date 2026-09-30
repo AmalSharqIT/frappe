@@ -23,7 +23,7 @@ from frappe.model import CORE_DOCTYPES as PERMITTED_CORE_DOCTYPES
 from frappe.model import OPTIONAL_FIELDS, get_permitted_fields
 from frappe.model.base_document import DOCTYPES_FOR_DOCTYPE
 from frappe.model.document import Document
-from frappe.query_builder import Criterion, Field, Order, functions
+from frappe.query_builder import Criterion, CustomFunction, Field, Order, functions
 from frappe.query_builder.custom import Month, MonthName, Quarter, Year
 
 CORE_DOCTYPES = DOCTYPES_FOR_DOCTYPE | frozenset(
@@ -194,6 +194,9 @@ FUNCTION_MAPPING = {
 	"QUARTER": Quarter,
 	"MONTH": Month,
 	"YEAR": Year,
+	"DATE": functions.Date,
+	"VALUEWRAPPER": ValueWrapper,
+	"TIME": CustomFunction("TIME", ["time"]),
 }
 
 # Functions that accept '*' as an argument (e.g., COUNT(*))
@@ -1050,6 +1053,9 @@ class Engine:
 						# user_type is permlevel 1 but not itself sensitive, and the built-in
 						# Link-field search (user.user_query) filters by it for every select-only caller
 						permlevel_0_fields.add("user_type")
+						permlevel_0_fields.add("first_name")
+						permlevel_0_fields.add("middle_name")
+						permlevel_0_fields.add("last_name")
 					self.permitted_fields_cache[cache_key] = permlevel_0_fields
 			return self.permitted_fields_cache[cache_key]
 		else:
