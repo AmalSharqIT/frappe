@@ -902,7 +902,6 @@ class DocType(Document):
 		make_boilerplate("controller._py", self)
 
 		if not self.istable:
-			make_boilerplate("test_controller._py", self.as_dict())
 			make_boilerplate("controller.js", self.as_dict())
 			# make_boilerplate("controller_list.js", self.as_dict())
 
