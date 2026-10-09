@@ -6,9 +6,11 @@
  "creation": "2014-06-19 05:20:26.331041",
  "doctype": "DocType",
  "document_type": "Document",
+ "documentation": "https://docs.frappe.io/erpnext/user/manual/en/email-template",
  "engine": "InnoDB",
  "field_order": [
   "subject",
+  "reference_doctype",
   "use_html",
   "response_html",
   "response",
@@ -22,6 +24,12 @@
    "in_list_view": 1,
    "label": "Subject",
    "reqd": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "Reference DocType",
+   "options": "DocType"
   },
   {
    "depends_on": "eval:!doc.use_html",

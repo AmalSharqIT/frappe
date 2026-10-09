@@ -4,6 +4,7 @@
  "allow_rename": 1,
  "autoname": "field:label",
  "creation": "2016-02-22 03:47:45.387068",
+ "deprecated": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [

@@ -2,7 +2,8 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:user",
- "creation": "2026-01-18 02:17:17.304705",
+ "creation": "2026-01-18",
+ "deprecated": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -27,7 +28,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-14",
+ "modified": "2026-08-05",
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Desktop Layout",

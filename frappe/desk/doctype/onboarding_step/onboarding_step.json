@@ -18,6 +18,7 @@
   "action_label",
   "column_break_7",
   "reference_document",
+  "module_onboarding",
   "show_full_form",
   "show_form_tour",
   "form_tour",
@@ -63,7 +64,7 @@
    "fieldname": "action",
    "fieldtype": "Select",
    "label": "Action",
-   "options": "Create Entry\nUpdate Settings\nShow Form Tour\nView Report\nGo to Page\nView Docs",
+   "options": "Create Entry\nUpdate Settings\nShow Form Tour\nView Report\nGo to Page\nView Docs\nComplete Onboarding",
    "reqd": 1
   },
   {
@@ -225,6 +226,14 @@
    "fieldname": "route_options",
    "fieldtype": "Code",
    "label": "Route Options"
+  },
+  {
+   "depends_on": "eval:doc.action == \"Complete Onboarding\";",
+   "fieldname": "module_onboarding",
+   "fieldtype": "Link",
+   "label": "Module Onboarding",
+   "mandatory_depends_on": "eval:doc.action == \"Complete Onboarding\";",
+   "options": "Module Onboarding"
   }
  ],
  "links": [],
