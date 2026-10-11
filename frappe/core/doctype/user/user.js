@@ -166,6 +166,16 @@ frappe.ui.form.on("User", {
 				frm.toggle_display(["sb1", "sb3", "modules_access"], true);
 			}
 
+			if (cint(frm.doc.enabled) && frappe.perm.has_perm("User", 1, "write")) {
+				frm.add_custom_button(
+					__("Change Password"),
+					() =>
+						frappe.ui.show_change_password_dialog(frm.doc.name, () =>
+							frm.reload_doc()
+						),
+					__("Password")
+				);
+			}
 			if (frappe.user.has_role("System Manager")) {
 				frappe.db.get_single_value("LDAP Settings", "enabled").then((value) => {
 					if (value === 1 && frm.doc.name != "Administrator") {
