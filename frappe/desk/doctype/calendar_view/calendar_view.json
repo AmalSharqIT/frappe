@@ -55,7 +55,7 @@
  ],
  "icon": "calendar-days",
  "links": [],
- "modified": "2026-06-14",
+ "modified": "2026-10-11",
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Calendar View",
@@ -73,6 +73,10 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "role": "Desk User",
+   "select": 1
   }
  ],
  "row_format": "Dynamic",
