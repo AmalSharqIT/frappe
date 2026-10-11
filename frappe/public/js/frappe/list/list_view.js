@@ -742,7 +742,7 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 			}
 		}
 
-		if (this.meta.documentation) {
+		if (this.meta.documentation && frappe.user_roles.includes("System Manager")) {
 			actions.push({
 				label: __("Documentation"),
 				href: this.meta.documentation,

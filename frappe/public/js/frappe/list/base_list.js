@@ -266,7 +266,7 @@ frappe.views.BaseList = class BaseList {
 
 		// the DocType's docs, also linked from the list's empty state
 		const docs = safe_href(this.meta?.documentation, "list");
-		if (docs) {
+		if (docs && frappe.user_roles.includes("System Manager")) {
 			this.page.add_dropdown_item({
 				label: __("Documentation"),
 				click: () => window.open(docs, "_blank"),

@@ -2030,7 +2030,7 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 			{
 				label: __("Documentation"),
 				action: () => window.open(this.report_doc.documentation_url),
-				condition: () => !!this.report_doc?.documentation_url,
+				condition: () => !!this.report_doc?.documentation_url && frappe.user_roles.includes("System Manager"),
 				standard: true,
 			},
 			{
