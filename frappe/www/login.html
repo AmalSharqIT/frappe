@@ -36,13 +36,13 @@
 </div>
 {% endif %}
 <div class="page-card-actions flex flex-col gap-3">
-	{% if not disable_user_pass_login %}
-	<button class="es-button w-full" data-variant="solid" type="submit">
-		{{ _("Continue") }}</button>
-	{% endif %}
 	{% if ldap_settings and ldap_settings.enabled %}
 	<button class="es-button w-full btn-ldap-login" data-variant="solid">
 		{{ _("Login with LDAP") }}</button>
+	{% endif %}
+	{% if not disable_user_pass_login %}
+	<button class="es-button w-full" data-variant="{{ "subtle" if ldap_settings and ldap_settings.enabled else "solid" }}" type="submit">
+		{{ _("Continue") }}</button>
 	{% endif %}
 	{% if login_with_email_link %}
 	<a href="#login-with-email-link"
