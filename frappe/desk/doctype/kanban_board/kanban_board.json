@@ -84,7 +84,7 @@
   }
  ],
  "links": [],
- "modified": "2026-06-14",
+ "modified": "2026-10-11",
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Kanban Board",
@@ -92,8 +92,8 @@
  "owner": "Administrator",
  "permissions": [
   {
-   "role": "Desk User",
-   "select": 1
+   "read": 1,
+   "role": "Desk User"
   },
   {
    "create": 1,
