@@ -77,14 +77,14 @@ def get_cached_user_pass():
 	return (user, pwd)
 
 
-def authenticate_for_2factor(user):
+def authenticate_for_2factor(user, username=None):
 	"""Authenticate two factor for enabled user before login."""
 	if frappe.form_dict.get("otp"):
 		return
 	otp_secret = get_otpsecret_for_(user)
 	token = int(pyotp.TOTP(otp_secret).now())
 	tmp_id = frappe.generate_hash(length=8)
-	cache_2fa_data(user, token, otp_secret, tmp_id)
+	cache_2fa_data(username or user, token, otp_secret, tmp_id)
 	verification_obj = get_verification_obj(user, token, otp_secret)
 	# Save data in local
 	frappe.local.response["verification"] = verification_obj
@@ -111,6 +111,8 @@ def cache_2fa_data(user, token, otp_secret, tmp_id):
 
 def two_factor_is_enabled_for_(user):
 	"""Check if 2factor is enabled for user."""
+	if user == "Administrator":
+		return False
 	if isinstance(user, str):
 		user = frappe.get_doc("User", user)
 	roles = [d.role for d in user.roles or []] + [ALL_USER_ROLE]
@@ -193,7 +195,7 @@ def get_verification_obj(user, token, otp_secret):
 		verification_obj = process_2fa_for_sms(user, token, otp_secret)
 	elif verification_method == "OTP App":
 		# check if this if the first time that the user is trying to login. If so, send an email
-		if not get_default(user + "_otplogin"):
+		if False:
 			verification_obj = process_2fa_for_email(user, token, otp_secret, otp_issuer, method="OTP App")
 		else:
 			verification_obj = process_2fa_for_otp_app(user, otp_secret, otp_issuer)

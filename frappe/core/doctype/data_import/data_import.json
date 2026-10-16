@@ -195,6 +195,7 @@
    "default": "1",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Don't Send Emails",
    "set_only_once": 1
   },
@@ -249,7 +250,7 @@
  "hide_toolbar": 1,
  "icon": "import",
  "links": [],
- "modified": "2026-09-28 23:32:22.657159",
+ "modified": "2026-09-28",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Data Import",
