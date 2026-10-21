@@ -52,7 +52,7 @@
   {
    "description": "Smallest circulating fraction unit (coin). For e.g. 1 cent for USD and it should be entered as 0.01",
    "fieldname": "smallest_currency_fraction_value",
-   "fieldtype": "Currency",
+   "fieldtype": "Float",
    "label": "Smallest Currency Fraction Value",
    "non_negative": 1
   },
@@ -69,7 +69,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Number Format",
-   "options": "\n#,###.##\n#.###,##\n# ###.##\n# ###,##\n#'###.##\n#, ###.##\n#,##,###.##\n#,###.###\n#.###\n#,###"
+   "options": "\n#,###.##\n#.###,##\n# ###.##\n# ###,##\n#'###.##\n#, ###.##\n#,##,###.##\n#,###.###\n#.###\n#,###\n#,###.#"
   },
   {
    "default": "0",
