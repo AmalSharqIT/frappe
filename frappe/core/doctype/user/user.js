@@ -166,7 +166,7 @@ frappe.ui.form.on("User", {
 				frm.toggle_display(["sb1", "sb3", "modules_access"], true);
 			}
 
-			if (cint(frm.doc.enabled) && frappe.perm.has_perm("User", 1, "write")) {
+			if (cint(frm.doc.enabled) && frm.get_perm(1, "write")) {
 				frm.add_custom_button(
 					__("Change Password"),
 					() =>
