@@ -87,6 +87,21 @@ class TestPdf(IntegrationTestCase):
 		self.assertTrue(reader.is_encrypted)
 		self.assertTrue(reader.decrypt(password))
 
+	def test_bulk_pdf_by_doctype_skips_a_deleted_document(self):
+		from frappe.utils.print_format import _download_multi_pdf
+
+		self.addCleanup(frappe.set_user, "Administrator")
+		frappe.set_user("test@example.com")
+		todo = frappe.get_doc({"doctype": "ToDo", "description": "Call Northwind Traders"}).insert()
+		deleted = frappe.get_doc({"doctype": "ToDo", "description": "Follow up with Litware"}).insert()
+		deleted.delete()
+		task_id = frappe.generate_hash()
+
+		_download_multi_pdf({"ToDo": [todo.name, deleted.name]}, "ToDo", task_id=task_id)
+
+		file = frappe.get_doc("File", {"file_name": f"ToDo_{task_id}.pdf"})
+		self.assertEqual(len(PdfReader(io.BytesIO(file.get_content())).pages), 1)
+
 	def test_smart_shrinking_is_opt_in(self):
 		from unittest.mock import patch
 
@@ -180,3 +195,23 @@ class TestPdf(IntegrationTestCase):
 
 		# If image was actually retrieved then size will be  in few kbs, else bytes.
 		self.assertGreaterEqual(len(pdf), 10_000)
+
+	def test_print_format_margin_without_a_length_is_ignored(self):
+		from types import SimpleNamespace
+
+		from bs4 import BeautifulSoup
+
+		from frappe.utils.pdf_generator.browser import Browser
+
+		self.addCleanup(frappe.set_user, "Administrator")
+		frappe.set_user("test@example.com")
+		browser = Browser.__new__(Browser)
+		browser.is_print_designer = False
+		browser.print_format = None
+		browser.options = {"page-size": "A4"}
+		browser.soup = BeautifulSoup("<style>.print-format { margin-left: auto; }</style>", "html5lib")
+		browser.body_page = SimpleNamespace(options={})
+		browser.header_page = browser.footer_page = None
+		browser.prepare_options_for_pdf()
+
+		self.assertAlmostEqual(browser.body_page.options["marginLeft"], 15 / 25.4, delta=0.01)
