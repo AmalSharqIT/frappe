@@ -1297,9 +1297,8 @@
   "currency_fraction_units": 10,
   "smallest_currency_fraction_value": 0.1,
   "currency_name": "Iranian Toman",
-  "currency_symbol": "\u062a.\u0627",
+  "currency_symbol": "\u062a",
   "number_format": "#,###.#",
-  "symbol_on_right": 1,
   "timezones": [
    "Asia/Tehran"
   ],
@@ -1309,9 +1308,8 @@
   "code": "iq",
   "currency": "IQD",
   "currency_name": "Iraqi Dinar",
-  "currency_symbol": "\u062f.\u0639",
+  "currency_symbol": "\u062f\u0639",
   "number_format": "#,###",
-  "symbol_on_right": 1,
   "timezones": [
    "Asia/Baghdad"
   ],
