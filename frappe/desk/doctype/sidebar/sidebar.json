@@ -12,6 +12,7 @@
   "header_icon",
   "column_break_defn",
   "app",
+  "roles",
   "items_section",
   "items",
   "provenance_section",
@@ -88,12 +89,17 @@
    "fieldtype": "Long Text",
    "label": "Merged From",
    "read_only": 1
+  },
+  {
+   "fieldname": "roles",
+   "fieldtype": "Small Text",
+   "label": "Roles"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-27 14:57:28.772713",
+ "modified": "2026-10-19",
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Sidebar",
