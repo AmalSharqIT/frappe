@@ -517,7 +517,7 @@ standard_help_items = [
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.show_about()",
 		"is_standard": 1,
-		"condition": "frappe.user.has_role('System Manager')",
+		"condition": "frappe.user.has_role('System Manager') || frappe.user.has_role('Developer')",
 	},
 	{
 		"item_label": "System Health",
