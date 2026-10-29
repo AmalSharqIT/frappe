@@ -255,7 +255,8 @@ class DesktopPage {
 			{
 				icon: "info",
 				label: "About",
-				condition: "frappe.user.has_role('System Manager')",
+				condition:
+					"frappe.user.has_role('System Manager') || frappe.user.has_role('Developer')",
 				onclick: function () {
 					return frappe.ui.toolbar.show_about();
 				},
