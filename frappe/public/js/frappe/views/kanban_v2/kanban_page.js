@@ -610,7 +610,7 @@ frappe.views.KanbanV2Page = class KanbanV2Page {
 
 		// as on the list view's menu
 		const docs = safe_href(this.meta.documentation, "kanban");
-		if (docs) {
+		if (docs && frappe.user_roles.includes("System Manager")) {
 			page.add_dropdown_item({
 				label: __("Documentation"),
 				click: () => window.open(docs, "_blank"),
