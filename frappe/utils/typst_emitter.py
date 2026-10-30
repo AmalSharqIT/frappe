@@ -696,8 +696,8 @@ class TypstEmitter:
 			else:
 				ruled = 'stroke: (bottom: 1.125pt + rgb("#e2e2e2")), inset: (bottom: 0.35em)'
 				spacing = "0.75em"
-			heading = f"#block(width: 100%, {ruled})[{label}]"
-			body = f"#stack(spacing: {spacing},\n[{heading}],\n[{body}])"
+			heading = f"#block(width: 100%, sticky: true, below: {spacing}, {ruled})[{label}]"
+			body = f"{heading}\n{body}"
 
 		block_args = self._section_block_args(section)
 		if section.get("keep_together"):
@@ -994,8 +994,22 @@ class TypstEmitter:
 			if align in ("center", "right") and section.get("field_orientation") != "left-right":
 				body = f"#grid(columns: (auto, 1fr), column-gutter: {gap_pt}pt, [{label}], [#align({align})[{value_text}]])"
 				return self._text_props(df, body)
+			if section.get("field_orientation") == "left-right" and align not in ("center", "right"):
+				if df.get("label_justify") == "space-between":
+					body = f"#grid(columns: (auto, 1fr), column-gutter: {gap_pt}pt, [{label}], [#align(right)[{value_text}]])"
+					return self._text_props(df, body)
+				if df.get("label_justify") == "space-evenly":
+					body = f"#grid(columns: (1fr, auto, 1fr, auto, 1fr), column-gutter: {gap_pt}pt, [], [{label}], [], [{value_text}], [])"
+					return self._text_props(df, body)
 			body = f"#grid(columns: (auto, auto), column-gutter: {gap_pt}pt, [{label}], [{value_text}])"
 			return _aligned(self._text_props(df, body), align)
+		if (
+			show_label == "hide"
+			and section.get("field_orientation") == "left-right"
+			and align not in ("center", "right")
+			and df.get("label_justify") == "space-evenly"
+		):
+			return _aligned(self._text_props(df, value_text), "center")
 		spacing = gap_effect if gap_effect is not None else 4
 		parts = [f"[{label}]"] if label else []
 		parts.append(f"[{value_text}]")
