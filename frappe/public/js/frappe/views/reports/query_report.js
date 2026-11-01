@@ -2109,7 +2109,8 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 									label:
 										__(df.doctype) +
 										" (" +
-										__(frappe.unscrub(df.fieldname)) +
+										(this.columns.find((col) => col.fieldname === df.fieldname)
+											?.name || __(frappe.unscrub(df.fieldname))) +
 										")",
 									value: JSON.stringify({
 										doctype: df.doctype,
@@ -2178,7 +2179,7 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 									? df.fieldname + "-" + frappe.scrub(values.doctype)
 									: df.fieldname,
 								fieldtype: df.fieldtype,
-								label: __(df.label),
+								label: __(df.label, null, df.parent),
 								insert_after_index: insert_after_index,
 								link_field: {
 									fieldname: values.fieldname,
