@@ -330,6 +330,9 @@ def attach_files_to_document(doc: "Document", event) -> None:
 	for df in attach_fields:
 		# this method runs in on_update hook of all documents
 		# we dont want the update to fail if file cannot be attached for some reason
+		if not doc.has_value_changed(df.fieldname):
+			continue
+
 		value = doc.get(df.fieldname)
 		if not (value or "").startswith(("/files", "/private/files", "http://", "https://")):
 			continue
