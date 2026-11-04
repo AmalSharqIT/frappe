@@ -689,7 +689,7 @@ frappe.ui.form.Toolbar = class Toolbar {
 
 		// as on the list view's menu
 		const docs = safe_href(this.frm.meta.documentation, "form");
-		if (docs) {
+		if (docs && frappe.user_roles.includes("System Manager")) {
 			this.page.add_dropdown_item({
 				label: __("Documentation"),
 				click: () => window.open(docs, "_blank"),

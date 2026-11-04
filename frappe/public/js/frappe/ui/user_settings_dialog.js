@@ -70,7 +70,6 @@ frappe.ui.show_user_settings = async function (default_tab) {
 				group: __("Settings"),
 				items: [
 					_profile_tab(user_data || {}),
-					_email_tab(user_data || {}),
 					_appearance_tab(user_data || {}),
 					_preferences_tab(user_data || {}),
 					_lists_tab(user_data || {}),
@@ -209,10 +208,6 @@ function _profile_tab(user_data) {
 						<div class="text-lg-semibold text-ink-gray-8">${frappe.utils.escape_html(full_name)}</div>
 						<div class="text-sm text-ink-gray-6">${frappe.utils.escape_html(email)}</div>
 					</div>
-					${frappe.ui.button.html({
-						label: __("Change Password"),
-						css_class: "change-password-btn ms-auto",
-					})}
 				</div>
 			`);
 
@@ -223,6 +218,7 @@ function _profile_tab(user_data) {
 					label: __("First Name"),
 					reqd: 1,
 					default: user_data.first_name || "",
+					read_only: 1,
 				},
 				{ fieldtype: "Column Break" },
 				{
@@ -230,6 +226,7 @@ function _profile_tab(user_data) {
 					fieldname: "middle_name",
 					label: __("Middle Name"),
 					default: user_data.middle_name || "",
+					read_only: 1,
 				},
 				{ fieldtype: "Section Break" },
 				{
@@ -237,6 +234,7 @@ function _profile_tab(user_data) {
 					fieldname: "last_name",
 					label: __("Last Name"),
 					default: user_data.last_name || "",
+					read_only: 1,
 				},
 				{ fieldtype: "Column Break" },
 				{
@@ -244,6 +242,7 @@ function _profile_tab(user_data) {
 					fieldname: "username",
 					label: __("Username"),
 					default: user_data.username || "",
+					read_only: 1,
 				},
 			]);
 

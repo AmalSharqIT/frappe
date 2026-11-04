@@ -135,11 +135,12 @@
   }
  ],
  "merged_from": "[\"Website\"]",
- "modified": "2026-10-01 01:05:00.000000",
+ "modified": "2026-10-19",
  "modified_by": "Administrator",
  "module": "Website",
  "name": "Website",
  "owner": "Administrator",
+ "roles": "System Manager",
  "standard": 1,
  "title": "Website"
 }

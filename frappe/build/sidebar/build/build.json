@@ -616,11 +616,12 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-30 21:16:00.000000",
+ "modified": "2026-10-19",
  "modified_by": "Administrator",
  "module": "Build",
  "name": "Build",
  "owner": "Administrator",
+ "roles": "System Manager",
  "standard": 1,
  "title": "Build"
 }

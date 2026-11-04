@@ -178,6 +178,7 @@ class Sidebar(Document, DeskViews):
 		items: DF.Table[SidebarItem]
 		merged_from: DF.LongText | None
 		module: DF.Link | None
+		roles: DF.SmallText | None
 		standard: DF.Check
 		title: DF.Data
 	# end: auto-generated types
@@ -1593,7 +1594,10 @@ def resolve_sidebar(shell: str, user: str, context: SidebarContext | None = None
 	if base.module == PRIVATE_MODULE:
 		return resolve_private_sidebar(shell, user, context, base)
 
-	filtered = filter_sidebar_items(base.rows, context.perm_ctx)
+	if not base.roles or set(base.roles.splitlines()) & set(frappe.get_roles(user)):
+		filtered = filter_sidebar_items(base.rows, context.perm_ctx)
+	else:
+		filtered = []
 
 	# Customizations are applied after the permission filter, never before, so a customization
 	# cannot bring back an item the user is not allowed to see.
@@ -1830,7 +1834,7 @@ def get_sidebar_bases(modules: list[str]) -> dict[str, frappe._dict]:
 	documents = frappe.get_all(
 		"Sidebar",
 		filters={"module": ["in", modules]},
-		fields=["name", "module", "title", "app", "header_icon"],
+		fields=["name", "module", "title", "app", "header_icon", "roles"],
 		order_by="name asc",
 	)
 
@@ -1959,6 +1963,7 @@ def get_sidebar_items(sidebar_names):
 			"navigate_to_tab",
 			"open_in_new_tab",
 			"is_default_module",
+			"roles",
 			# Read so the base can hide, which is what the editor's app layer writes. See
 			# `filter_sidebar_items`, which is where the value reaches the merge.
 			"hidden",
@@ -2074,10 +2079,12 @@ def filter_sidebar_items(items, perm_ctx, check_permission: bool = True):
 		# Check permission first, so nothing below runs for an item about to be dropped. This
 		# walks every module on every boot, so an item the user cannot see should cost no
 		# queries.
-		if (
-			check_permission
-			and item.type not in ("Section Break", "Spacer")
-			and not is_item_allowed(item.link_to, item.link_type, perm_ctx)
+		if check_permission and (
+			(
+				item.type not in ("Section Break", "Spacer")
+				and not is_item_allowed(item.link_to, item.link_type, perm_ctx)
+			)
+			or (item.roles and not set(item.roles.splitlines()) & set(frappe.get_roles(frappe.session.user)))
 		):
 			continue
 

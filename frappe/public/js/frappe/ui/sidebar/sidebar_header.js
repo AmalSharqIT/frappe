@@ -109,6 +109,9 @@ frappe.ui.SidebarHeader = class SidebarHeader {
 		// Two sections, either of which may be empty; the row is worth offering only if something
 		// is under it.
 		const help = this.get_help_siblings();
+		if (!frappe.user.has_role(["System Manager", "Developer"])) {
+			return navbar;
+		}
 		if (help.some((section) => section.options.length)) {
 			navbar.push({
 				name: "help",
