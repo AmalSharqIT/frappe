@@ -360,7 +360,7 @@
  "icon": "printer",
  "idx": 1,
  "links": [],
- "modified": "2026-10-28",
+ "modified": "2026-11-05",
  "modified_by": "Administrator",
  "module": "Printing",
  "name": "Print Format",
@@ -388,5 +388,6 @@
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1,
+ "translated_doctype": 1,
  "image_field": "preview_image"
 }
