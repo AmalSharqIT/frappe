@@ -749,7 +749,7 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 			}
 		}
 
-		if (this.meta.documentation) {
+		if (this.meta.documentation && frappe.user_roles.includes("System Manager")) {
 			actions.push({
 				label: __("Documentation"),
 				href: this.meta.documentation,
@@ -936,6 +936,8 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 			this.list_filter.update_layout_columns(layout, columns);
 			return;
 		}
+
+		if (!frappe.user.has_role("System Manager")) return;
 
 		let fields;
 
@@ -1292,7 +1294,7 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 
 				const headerFieldname = col.type === "Status" ? "status_field" : col.df?.fieldname;
 				const resizeHandle =
-					can_resize && headerFieldname && col.type !== "Tag"
+					headerFieldname && col.type !== "Tag"
 						? `<div class="list-col-resize-handle"></div>`
 						: "";
 				return `<div class="${classes}" data-fieldname="${headerFieldname}">${html}${resizeHandle}</div>
