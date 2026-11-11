@@ -574,7 +574,22 @@ class File(Document):
 		elif not self.file_name and self.file_url:
 			self.file_name = self.file_url.split("/")[-1].split("?")[0]
 		else:
-			self.file_name = re.sub(r"/", "", self.file_name)
+			if self.attached_to_doctype and self.attached_to_name:
+				count = (
+					frappe.db.count(
+						"File",
+						{
+							"attached_to_doctype": self.attached_to_doctype,
+							"attached_to_name": self.attached_to_name,
+						},
+					)
+					+ 1
+				)
+				self.file_name = re.sub(
+					r"/", "", f"{self.attached_to_doctype}-{self.attached_to_name}-{count}"
+				)
+			else:
+				self.file_name = re.sub(r"/", "", self.file_name)
 
 	def generate_content_hash(self):
 		if self.content_hash or not self.file_url or self.is_remote_file:
