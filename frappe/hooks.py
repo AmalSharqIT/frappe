@@ -518,18 +518,14 @@ standard_help_items = [
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.show_about()",
 		"is_standard": 1,
+		"condition": "frappe.user.has_role('System Manager') || frappe.user.has_role('Developer')",
 	},
 	{
 		"item_label": "System Health",
 		"item_type": "Route",
 		"route": "/desk/system-health-report",
 		"is_standard": 1,
-	},
-	{
-		"item_label": "Frappe Support",
-		"item_type": "Route",
-		"route": "https://frappe.io/support",
-		"is_standard": 1,
+		"condition": "frappe.user.has_role('System Manager')",
 	},
 ]
 
