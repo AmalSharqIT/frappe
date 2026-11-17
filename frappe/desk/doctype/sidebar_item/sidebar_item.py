@@ -34,6 +34,7 @@ class SidebarItem(Document):
 		parentfield: DF.Data
 		parenttype: DF.Data
 		roles: DF.SmallText | None
+		route: DF.Data | None
 		route_options: DF.Code | None
 		show_arrow: DF.Check
 		type: DF.Literal["Link", "Section Break", "Spacer"]
