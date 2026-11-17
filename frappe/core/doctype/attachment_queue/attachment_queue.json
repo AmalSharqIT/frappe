@@ -44,7 +44,7 @@
  ],
  "link_display_mode": "Search",
  "links": [],
- "modified": "2026-11-02 16:13:01.879424",
+ "modified": "2026-11-15",
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Attachment Queue",
@@ -61,13 +61,6 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "read": 1,
-   "role": "Desk User",
    "write": 1
   }
  ],
