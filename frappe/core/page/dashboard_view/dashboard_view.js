@@ -98,7 +98,7 @@ frappe.pages["dashboard-view"].on_page_load = function (wrapper) {
 	function show_missing(name) {
 		page.set_breadcrumbs([
 			{ label: __("Dashboard"), href: "/desk/dashboard" },
-			{ label: name },
+			{ label: __(name) },
 		]);
 		frappe.utils.set_title(__("Dashboard"));
 		content.append(
