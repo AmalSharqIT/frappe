@@ -204,7 +204,7 @@ frappe.pages["dashboard-view"].on_page_load = function (wrapper) {
 		const label = title || docname;
 		page.set_breadcrumbs([
 			{ label: __("Dashboard"), href: "/desk/dashboard" },
-			{ label: label },
+			{ label: __(label) },
 		]);
 		frappe.utils.set_title(label);
 	}
