@@ -9,6 +9,7 @@ frappe.request.url = "/";
 frappe.request.ajax_count = 0;
 frappe.request.waiting_for_ajax = [];
 frappe.request.logs = {};
+frappe.request.last_alert = 0;
 
 frappe.xcall = function (method, params, type, opts = {}) {
 	return new Promise((resolve, reject) => {
@@ -352,6 +353,15 @@ frappe.request.call = function (opts) {
 				if (status_code_handler) {
 					status_code_handler(xhr);
 					return;
+				} else if (xhr.status === 0 && textStatus !== "abort") {
+					if (Date.now() - frappe.request.last_alert >= 10_000) {
+						frappe.request.last_alert = Date.now();
+						frappe.show_alert({
+							indicator: "orange",
+							message: __("Connection Lost"),
+							subtitle: __("Unable to connect to the server."),
+						});
+					}
 				}
 				// if not handled by error handler!
 				opts.error_callback && opts.error_callback(xhr);
