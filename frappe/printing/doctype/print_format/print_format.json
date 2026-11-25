@@ -376,7 +376,7 @@
  "icon": "printer",
  "idx": 1,
  "links": [],
- "modified": "2026-11-18 14:00:00.000000",
+ "modified": "2026-11-18",
  "modified_by": "Administrator",
  "module": "Printing",
  "name": "Print Format",
@@ -395,8 +395,8 @@
    "write": 1
   },
   {
-   "role": "Desk User",
-   "select": 1
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "row_format": "Dynamic",

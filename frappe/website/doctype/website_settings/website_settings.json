@@ -486,7 +486,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-22 08:58:40.925592",
+ "modified": "2026-10-22",
  "modified_by": "Administrator",
  "module": "Website",
  "name": "Website Settings",
@@ -497,14 +497,9 @@
    "email": 1,
    "print": 1,
    "read": 1,
-   "role": "Website Manager",
+   "role": "System Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "permlevel": 1,
-   "read": 1,
-   "role": "All"
   }
  ],
  "sort_field": "creation",
