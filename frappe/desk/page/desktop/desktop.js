@@ -275,18 +275,11 @@ class DesktopPage {
 			{
 				icon: "info",
 				label: "About",
+				condition: () => frappe.user.has_role(["System Manager", "Developer"]),
 				onclick: function () {
 					return frappe.ui.toolbar.show_about();
 				},
 				order: 30,
-			},
-			{
-				icon: "life-buoy",
-				label: "Frappe Support",
-				onclick: function () {
-					window.open("https://support.frappe.io/help", "_blank");
-				},
-				order: 40,
 			},
 		];
 		// sort() is stable, so items sharing an `order` keep the order they were added in.
