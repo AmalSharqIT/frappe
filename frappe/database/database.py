@@ -1244,7 +1244,21 @@ class Database:
 			self.begin()
 
 		self.value_cache.clear()
-		self.after_commit.run()
+		self.run_after_transaction_callbacks(self.after_commit)
+
+	def run_after_transaction_callbacks(self, callbacks: CallbackManager):
+		"""Run the callbacks queued for after the commit or rollback, logging the ones that fail.
+
+		The transaction has settled by now and these callbacks are side effects that can not
+		undo it, so raising here would only destroy the response of a request whose database
+		work is already finished.
+		"""
+		while len(callbacks):
+			try:
+				# the failing callback is already off the queue, so this resumes at the next one
+				callbacks.run()
+			except Exception:
+				frappe.log_error("Failed to run after transaction callback", defer_insert=True)
 
 	def rollback(self, *, save_point=None, chain=False):
 		"""`ROLLBACK` current transaction. Optionally rollback to a known save_point."""
@@ -1265,7 +1279,7 @@ class Database:
 				self.begin()
 
 			self.value_cache.clear()
-			self.after_rollback.run()
+			self.run_after_transaction_callbacks(self.after_rollback)
 		else:
 			warnings.warn(message=TRANSACTION_DISABLED_MSG, stacklevel=2)
 
@@ -1508,6 +1522,11 @@ class Database:
 		Doctype name can be passed directly, it will be pre-pended with `tab`.
 		"""
 		return self.sql_ddl(f"truncate `{get_table_name(doctype)}`")
+
+	def drop_columns(self, doctype: str, columns: list[str]):
+		"""Drop columns from a doctype's table. This runs a DDL command `ALTER TABLE`."""
+		drops = ", ".join(f"DROP `{column}`" for column in columns)
+		self.sql_ddl(f"ALTER TABLE `{get_table_name(doctype)}` {drops}")
 
 	def get_last_created(self, doctype):
 		last_record = self.get_all(doctype, ("creation"), limit=1, order_by="creation desc")

@@ -24,6 +24,7 @@ from frappe.core.doctype.file.utils import get_corrupted_image_msg, get_extensio
 from frappe.desk.form.utils import add_comment
 from frappe.exceptions import ValidationError
 from frappe.tests import IntegrationTestCase, UnitTestCase
+from frappe.tests.utils.test_capabilities import TestService, requires_test_service
 from frappe.utils import get_files_path, set_request
 
 if TYPE_CHECKING:
@@ -678,6 +679,7 @@ class TestFile(IntegrationTestCase):
 		test_file.file_name = "/private/files/_file"
 		self.assertRaisesRegex(ValidationError, "File name cannot have", test_file.validate)
 
+	@requires_test_service(TestService.WEB_SERVER)
 	def test_make_thumbnail(self):
 		# test web image
 		test_file: File = frappe.get_doc(
@@ -2009,12 +2011,13 @@ class TestFileListOwnerRestriction(IntegrationTestCase):
 
 	OWNER = "test1@example.com"
 	OTHER = "test2@example.com"
+	ROLE = "_Test Role"
 
 	def setUp(self):
 		frappe.set_user("Administrator")
 		other_user = frappe.get_doc("User", self.OTHER)
-		if not any(r.role == "Blogger" for r in other_user.roles):
-			other_user.append("roles", {"role": "Blogger"})
+		if not any(r.role == self.ROLE for r in other_user.roles):
+			other_user.append("roles", {"role": self.ROLE})
 			other_user.save(ignore_permissions=True)
 
 		frappe.set_user(self.OWNER)
@@ -2061,13 +2064,13 @@ class TestFileListUserPermissionRestriction(IntegrationTestCase):
 	RESTRICTED = "test1@example.com"
 	OTHER = "test2@example.com"
 	DOCTYPE = "Test User Perm Attachment"
+	ROLE = "_Test Role"
 
-	@classmethod
-	def setUpClass(cls):
-		super().setUpClass()
+	def setUp(self):
+		frappe.set_user("Administrator")
 		frappe.get_doc(
 			doctype="DocType",
-			name=cls.DOCTYPE,
+			name=self.DOCTYPE,
 			module="Custom",
 			custom=1,
 			fields=[
@@ -2075,18 +2078,10 @@ class TestFileListUserPermissionRestriction(IntegrationTestCase):
 			],
 			permissions=[{"role": "All", "read": 1, "create": 1}],
 		).insert(ignore_if_duplicate=True)
-
-	@classmethod
-	def tearDownClass(cls):
-		super().tearDownClass()
-		frappe.delete_doc("DocType", cls.DOCTYPE, force=True, ignore_permissions=True)
-
-	def setUp(self):
-		frappe.set_user("Administrator")
 		for user in (self.RESTRICTED, self.OTHER):
 			user_doc = frappe.get_doc("User", user)
-			if not any(r.role == "Blogger" for r in user_doc.roles):
-				user_doc.append("roles", {"role": "Blogger"})
+			if not any(r.role == self.ROLE for r in user_doc.roles):
+				user_doc.append("roles", {"role": self.ROLE})
 				user_doc.save(ignore_permissions=True)
 
 		frappe.get_doc(
@@ -2094,11 +2089,11 @@ class TestFileListUserPermissionRestriction(IntegrationTestCase):
 				"doctype": "User Permission",
 				"user": self.RESTRICTED,
 				"allow": "Role",
-				"for_value": "Blogger",
+				"for_value": self.ROLE,
 			}
 		).insert(ignore_permissions=True)
 
-		self.permitted_record = frappe.get_doc({"doctype": self.DOCTYPE, "linked_role": "Blogger"}).insert(
+		self.permitted_record = frappe.get_doc({"doctype": self.DOCTYPE, "linked_role": self.ROLE}).insert(
 			ignore_permissions=True
 		)
 		self.out_of_scope_record = frappe.get_doc(
@@ -2125,6 +2120,11 @@ class TestFileListUserPermissionRestriction(IntegrationTestCase):
 	def tearDown(self):
 		frappe.set_user("Administrator")
 		frappe.db.rollback()
+
+	@classmethod
+	def tearDownClass(cls):
+		frappe.delete_doc("DocType", cls.DOCTYPE, force=True, ignore_permissions=True)
+		super().tearDownClass()
 
 	def test_restricted_user_excludes_out_of_scope_file(self):
 		frappe.set_user(self.RESTRICTED)

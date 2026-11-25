@@ -118,6 +118,14 @@ class TestDBUpdate(IntegrationTestCase):
 				f"""show index from `tab{doctype}` where column_name = '{field}' and Non_unique = 0""",
 				as_dict=1,
 			)
+		else:
+			indexes = []
+			for index in frappe.db.sql(f"PRAGMA index_list(`tab{doctype}`)", as_dict=True):
+				if not index.unique:
+					continue
+				columns = frappe.db.sql(f"PRAGMA index_info(`{index.name}`)", as_dict=True)
+				if any(column.name == field for column in columns):
+					indexes.append(index)
 		self.assertEqual(
 			len(indexes), 1, msg=f"There should be 1 index on {doctype}.{field}, found {indexes}"
 		)
@@ -250,7 +258,7 @@ class TestDBUpdate(IntegrationTestCase):
 
 		doctype.autoname = "hash"
 		doctype.save()
-		varchar = "varchar" if frappe.db.db_type == "mariadb" else "character varying"
+		varchar = "varchar" if frappe.db.db_type in ("mariadb", "sqlite") else "character varying"
 		self.assertIn(varchar, frappe.db.get_column_type(doctype.name, "name"))
 		doc.reload()  # ensure that docs are still accesible
 
@@ -281,10 +289,39 @@ class TestDBUpdate(IntegrationTestCase):
 		test_doc = new_doctype().insert()
 		col_name = f"col_{frappe.generate_hash(length=4)}"
 		add_column(test_doc.name, fieldtype="Data", column_name=col_name, length=50)
-		length = frappe.db.sql(
-			f"SELECT CHARACTER_MAXIMUM_LENGTH FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'tab{test_doc.name}' AND COLUMN_NAME = '{col_name}' ",
-		)[0][0]
+		if frappe.db.db_type == "sqlite":
+			column_type = frappe.db.get_column_type(test_doc.name, col_name)
+			length = int(column_type.removeprefix("varchar(").removesuffix(")"))
+		else:
+			length = frappe.db.sql(
+				f"SELECT CHARACTER_MAXIMUM_LENGTH FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'tab{test_doc.name}' AND COLUMN_NAME = '{col_name}' ",
+			)[0][0]
 		self.assertEqual(length, 64)
+
+	def test_trim_table_drops_every_orphaned_column(self):
+		from frappe.database.schema import add_column
+
+		doctype = new_doctype().insert()
+		table = f"tab{doctype.name}"
+		# the DDL below commits itself, so the table outlives this test's rollback
+		self.addCleanup(frappe.db.commit)
+		self.addCleanup(frappe.db.sql_ddl, f"DROP TABLE IF EXISTS `{table}`")
+		self.addCleanup(doctype.delete)
+
+		orphaned_columns = ["orphan_one", "orphan_two"]
+		for column in orphaned_columns:
+			add_column(doctype.name, column_name=column, fieldtype="Data")
+		# SQLite can't drop an indexed column, so trim has to drop these indexes first
+		frappe.db.sql_ddl(f"CREATE INDEX `{table}_orphan` ON `{table}` (`orphan_one`)")
+		frappe.db.sql_ddl(f"CREATE INDEX `{table}_mixed` ON `{table}` (`some_fieldname`, `orphan_two`)")
+		frappe.db.sql_ddl(f"CREATE INDEX `{table}_kept` ON `{table}` (`some_fieldname`)")
+
+		dropped_columns = frappe.model.meta.trim_table(doctype.name, dry_run=False)
+
+		self.assertCountEqual(dropped_columns, orphaned_columns)
+		for column in orphaned_columns:
+			self.assertFalse(frappe.db.has_column(doctype.name, column))
+		self.assertTrue(frappe.db.has_index(table, f"{table}_kept"))
 
 	@run_only_if(db_type_is.MARIADB)
 	def test_generated_column_keeps_unique_index(self):

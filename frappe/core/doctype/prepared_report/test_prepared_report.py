@@ -2,15 +2,17 @@
 # License: MIT. See LICENSE
 import json
 import time
+import unittest
 from contextlib import contextmanager
 
 import frappe
 from frappe.core.doctype.prepared_report.prepared_report import delete_prepared_reports
 from frappe.desk.query_report import generate_report_result, get_prepared_report_result, get_report_doc
 from frappe.tests import IntegrationTestCase, timeout
-from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils.test_capabilities import TestService, requires_test_service
 
 
+@requires_test_service(TestService.BACKGROUND_WORKER)
 class TestPreparedReport(IntegrationTestCase):
 	@classmethod
 	def tearDownClass(cls):
@@ -82,6 +84,10 @@ class TestPreparedReport(IntegrationTestCase):
 		frappe.set_user("test1@example.com")
 		self.assertRaises(frappe.PermissionError, delete_prepared_reports, [{"name": doc.name}])
 
+	@unittest.skipIf(
+		frappe.conf.db_type == "sqlite",
+		"This test needs a database sleep function, which SQLite does not provide.",
+	)
 	def test_start_status_and_kill_jobs(self):
 		if frappe.db.db_type == "postgres":
 			query = "select pg_sleep(5)"
