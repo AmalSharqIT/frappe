@@ -205,9 +205,6 @@ class LDAPSettings(Document):
 		user.remove_roles(*roles_to_remove)
 
 	def create_or_update_user(self, user_data: dict, groups: list | None = None):
-		if user_data["email"] is None:
-			frappe.throw(_("Your account has no email address."))
-
 		user: User = None
 		role: str = None
 
@@ -371,6 +368,8 @@ class LDAPSettings(Document):
 	def convert_ldap_entry_to_dict(self, user_entry: Entry):
 		# support multiple email values
 		email = user_entry[self.ldap_email_field].value
+		if not email:
+			frappe.throw(_("Your LDAP account has no email address. Please contact your LDAP administrator."))
 
 		if isinstance(email, list):
 			# check if any of the email in the list already exist
